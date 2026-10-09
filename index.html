@@ -1,975 +1,341 @@
-e
-Html
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
-<head><meta name="google-site-verification" content="pxf7ftaEnA32uJnzT8Jrb5LjQPEF2YZSeQuCdkZPXMQ" /><meta name="google-site-verification" content="pxf7ftaEnA32uJnzT8Jrb5LjQPEF2YZSeQuCdkZPXMQ" />
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sada-e-Najaf Islamic Online Institute | Shia Quran, Tajweed & Ahlulbayt Studies</title>
-  <meta name="description" content="Premier Shia Muslim online academy providing 1-on-1 classes in Quran with Tajweed, Fiqh-e-Jafariya, Basic Islamic Creed, Nahjul Balagha, and Shia Islamic Studies.">
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google-site-verification" content="psfYftatn4Sia2r8SiRtSiJQPF2VISeUldk2PX4Q" />
+  <title>Noor-ul-Quran Online Shia Academy | Dedicated 1-on-1 Shia Quranic & Islamic Education</title>
+  <meta name="description" content="Premier Shia Online Quran Academy offering 1-on-1 personalized Quran, Tajweed, Ahkam, Nahjul Balagha, and Fiqh Jafaria classes with qualified male and female Shia scholars worldwide." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
+      darkMode: 'class',
       theme: {
         extend: {
-          colors: {
-            brand: { 50: '#ecfdf5', 100: '#d1fae5', 600: '#059669', 800: '#065f46', 900: '#064e3b', 950: '#022c22' },
-            gold: { 400: '#fbbf24', 500: '#f59e0b', 600: '#d97706' }
-          },
           fontFamily: {
-            arabic: ['Amiri', 'serif'],
-            sans: ['Plus Jakarta Sans', 'system-ui', 'sans-serif']
+            sans: ['Outfit', 'sans-serif'],
+            serif: ['Playfair Display', 'serif'],
+            arabic: ['Amiri', 'serif']
+          },
+          colors: {
+            emerald: {
+              850: '#064e3b',
+              900: '#064436',
+              950: '#022c22'
+            },
+            amber: {
+              450: '#f59e0b'
+            }
           }
         }
       }
     }
   </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- React 18 & Babel -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
   <style>
-    body { font-family: 'Plus Jakarta Sans', sans-serif; }
-    .font-arabic { font-family: 'Amiri', serif; }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #06241b; }
+    ::-webkit-scrollbar-thumb { background: #10b981; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #059669; }
+    .islamic-pattern {
+      background-color: #041c14;
+      background-image: radial-gradient(#10b981 0.75px, transparent 0.75px), radial-gradient(#059669 0.75px, #041c14 0.75px);
+      background-size: 30px 30px;
+      background-position: 0 0, 15px 15px;
+    }
+    .gold-gradient-text {
+      background: linear-gradient(135deg, #fef08a 0%, #f59e0b 50%, #d97706 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .arabic-text {
+      font-family: 'Amiri', serif;
+      direction: rtl;
+    }
   </style>
 </head>
-<body class="bg-stone-50 text-stone-900 antialiased selection:bg-brand-600 selection:text-white">
+<body class="bg-[#031610] text-slate-100 font-sans antialiased selection:bg-amber-500 selection:text-slate-950">
+  <div id="root"></div>
 
-  <!-- TOP BAR -->
-  <header class="bg-brand-950 text-emerald-100 text-xs py-2 px-4 border-b border-brand-900">
-    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
-      <div class="flex items-center space-x-3">
-        <span class="px-2 py-0.5 bg-gold-500 text-stone-950 font-bold rounded text-[10px] uppercase tracking-wider">Free 3-Day Trial</span>
-        <span class="truncate">Certified Shia Hawza Scholars &bull; Female &amp; Male Tutors Available</span>
-      </div>
-      <div class="flex items-center space-x-4">
-        <a href="https://wa.me/923148681093" target="_blank" rel="noopener noreferrer" class="hover:text-gold-400 flex items-center gap-1 transition">
-          <svg class="w-3.5 h-3.5 text-emerald-400" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
-          <span>WhatsApp: +92 314 8681093</span>
-        </a>
-        <span class="hidden md:inline text-brand-700">&bull;</span>
-        <a href="mailto:molanaimtiazali@gmail.com" class="hidden md:inline hover:text-gold-400 transition">molanaimtiazali@gmail.com</a>
-      </div>
-    </div>
-  </header>
+  <script type="text/babel">
+    const { useState, useEffect, useRef } = React;
 
-  <!-- NAVIGATION -->
-  <nav class="bg-white/95 backdrop-blur-md sticky top-0 z-40 border-b border-stone-200 shadow-sm">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center h-20">
-        <div class="flex items-center gap-3">
-          <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-brand-900 to-brand-800 border-2 border-gold-500 flex items-center justify-center text-gold-400 shadow-md">
-            <span class="font-arabic text-2xl font-bold">ص</span>
-          </div>
-          <div>
-            <span class="font-extrabold text-lg sm:text-xl text-brand-950 block leading-tight">Sada-e-Najaf</span>
-            <span class="text-[11px] font-semibold text-gold-600 block">Shia Islamic Online Institute</span>
-          </div>
-        </div>
-
-        <div class="hidden lg:flex items-center space-x-7 text-xs font-bold uppercase tracking-wider text-stone-700">
-          <a href="#hero" class="hover:text-brand-800 transition">Home</a>
-          <a href="#courses" class="hover:text-brand-800 transition">Courses</a>
-          <a href="#teachers" class="hover:text-brand-800 transition">Teachers</a>
-          <a href="#quran" class="hover:text-brand-800 transition">Audio Quran</a>
-          <a href="#pricing" class="hover:text-brand-800 transition">Fee &amp; Plans</a>
-          <a href="#testimonials" class="hover:text-brand-800 transition">Reviews</a>
-          <a href="#faq" class="hover:text-brand-800 transition">FAQ</a>
-        </div>
-
-        <div class="flex items-center gap-3">
-          <button onclick="openTrialModal()" class="px-5 py-2.5 bg-brand-800 hover:bg-brand-900 text-gold-300 hover:text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-md border border-gold-500/30 transition">
-            Book 3-Day Trial
-          </button>
-          <button onclick="toggleMobileMenu()" class="lg:hidden p-2 rounded-lg text-stone-700 hover:bg-stone-100" aria-label="Toggle menu">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="hidden lg:hidden bg-white border-b border-stone-200 px-4 pt-3 pb-6 space-y-2">
-      <a href="#hero" onclick="toggleMobileMenu()" class="block py-2 text-stone-700 font-semibold hover:text-brand-800">Home</a>
-      <a href="#courses" onclick="toggleMobileMenu()" class="block py-2 text-stone-700 font-semibold hover:text-brand-800">Courses</a>
-      <a href="#teachers" onclick="toggleMobileMenu()" class="block py-2 text-stone-700 font-semibold hover:text-brand-800">Faculty</a>
-      <a href="#quran" onclick="toggleMobileMenu()" class="block py-2 text-stone-700 font-semibold hover:text-brand-800">Audio Quran</a>
-      <a href="#pricing" onclick="toggleMobileMenu()" class="block py-2 text-stone-700 font-semibold hover:text-brand-800">Fee Plans</a>
-      <a href="#testimonials" onclick="toggleMobileMenu()" class="block py-2 text-stone-700 font-semibold hover:text-brand-800">Reviews</a>
-      <a href="#faq" onclick="toggleMobileMenu()" class="block py-2 text-stone-700 font-semibold hover:text-brand-800">FAQ</a>
-    </div>
-  </nav>
-
-  <!-- HERO SECTION -->
-  <section id="hero" class="relative overflow-hidden bg-gradient-to-b from-brand-950 via-brand-900 to-teal-950 text-white py-16 lg:py-24">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-        <div class="lg:col-span-7 space-y-6">
-          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-800/80 border border-gold-400/40 text-gold-300 text-xs font-bold uppercase tracking-wider">
-            <span>✨ Shia Islamic Online Academy</span>
-            <span class="w-1.5 h-1.5 rounded-full bg-gold-400"></span>
-            <span>Global 1-on-1 Classes</span>
-          </div>
-          <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">
-            Learn Quran &amp; Ahlulbayt (AS) Sciences with Hawza Scholars
-          </h1>
-          <p class="text-emerald-100/90 text-base sm:text-lg leading-relaxed max-w-2xl font-light">
-            Personalized 1-on-1 live classes for kids and adults worldwide. Dedicated female teachers for Mominaat and certified male Huffaz for Nazra, Tajweed, Fiqh-e-Jafariya, and Nahjul Balagha.
-          </p>
-          <div class="flex flex-wrap gap-4 pt-2">
-            <button onclick="openTrialModal()" class="px-7 py-3.5 bg-gradient-to-r from-gold-400 to-gold-500 hover:from-gold-300 hover:to-gold-400 text-stone-950 font-extrabold rounded-xl shadow-lg transition">
-              Start 3-Day Free Trial
-            </button>
-            <a href="https://wa.me/923148681093?text=Salam%20Molana%20Imtiaz%20Ali,%20I%20am%20interested%20in%20online%20classes." target="_blank" rel="noopener noreferrer" class="px-6 py-3.5 bg-brand-800 hover:bg-brand-700 border border-emerald-500/50 text-white font-semibold rounded-xl transition flex items-center gap-2">
-              <svg class="w-5 h-5 text-emerald-400" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
-              <span>Instant WhatsApp Inquiry</span>
-            </a>
-          </div>
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-brand-800/80 text-xs text-emerald-200">
-            <div><div class="text-2xl font-extrabold text-gold-400">500+</div><div>Momineen Students</div></div>
-            <div><div class="text-2xl font-extrabold text-gold-400">1-on-1</div><div>Personalized Focus</div></div>
-            <div><div class="text-2xl font-extrabold text-gold-400">Female</div><div>Tutors for Sisters</div></div>
-            <div><div class="text-2xl font-extrabold text-gold-400">24/7</div><div>Flexible Time Slots</div></div>
-          </div>
-        </div>
-
-        <div class="lg:col-span-5">
-          <div class="relative rounded-3xl overflow-hidden border-2 border-gold-500/50 shadow-2xl bg-brand-950">
-            <img src="/images/shrine_hazrat_ali_1791361754414.jpg" 
-                 onerror="this.src='https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?w=800&auto=format&fit=crop&q=80'" 
-                 alt="Holy Shrine of Imam Ali (AS) in Najaf" 
-                 class="w-full h-80 object-cover">
-            <div class="absolute inset-0 bg-gradient-to-t from-brand-950 via-brand-950/40 to-transparent"></div>
-            <div class="absolute bottom-0 inset-x-0 p-6 space-y-1">
-              <span class="text-[10px] font-bold uppercase tracking-wider text-gold-400">Holy Shrine of Imam Ali (A.S.)</span>
-              <h3 class="font-arabic text-xl font-bold text-white">مرقد أمير المؤمنين علي بن أبي طالب (ع) - النجف الأشرف</h3>
-              <p class="text-xs text-emerald-200">Grounded in the authentic scholarly heritage of Hawza Ilmiyya Najaf al-Ashraf</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- COURSES SECTION -->
-  <section id="courses" class="py-16 sm:py-24 bg-stone-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-3xl mx-auto space-y-3 mb-14">
-        <span class="text-brand-800 text-xs font-bold uppercase tracking-widest bg-emerald-100 px-3 py-1 rounded-full border border-emerald-200">Comprehensive Curriculum</span>
-        <h2 class="text-3xl sm:text-4xl font-extrabold text-stone-900">Featured Shia Quran &amp; Deeniyat Courses</h2>
-        <p class="text-stone-600 text-sm">Interactive 1-on-1 personalized syllabus designed for children, youth, and adults.</p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- Course 1: Fiqh-e-Jafariya -->
-        <div class="bg-white rounded-3xl overflow-hidden border border-stone-200 shadow-sm hover:shadow-xl transition flex flex-col justify-between">
-          <div class="h-48 overflow-hidden relative">
-            <img src="/images/shia_fiq_book_1791362272713.jpg" 
-                 onerror="this.src='https://images.unsplash.com/photo-1544717305-2782549b5136?w=600&auto=format&fit=crop&q=80'" 
-                 alt="Shia Fiqh Book" class="w-full h-full object-cover">
-            <span class="absolute top-3 right-3 bg-brand-900 text-gold-300 text-[10px] font-bold px-2.5 py-1 rounded-full">Fiqh &amp; Ahkam</span>
-          </div>
-          <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
-            <div>
-              <h3 class="text-lg font-bold text-stone-900">Fiqh-e-Jafariya (Towzih al-Masa'il)</h3>
-              <p class="text-stone-600 text-xs mt-2 leading-relaxed">
-                Rules of Taharat, Shia Wudu, Ghusl, Tayammum, Namaz-e-Ja'fari, Roza, and everyday Halal/Haram laws according to Ayatollah Sistani and Ayatollah Khamenei.
-              </p>
-            </div>
-            <div class="pt-4 border-t border-stone-100 flex items-center justify-between">
-              <span class="text-xs font-extrabold text-brand-800">$35 / month</span>
-              <button onclick="openCourseModal('Fiqh-e-Jafariya & Shia Ahkam', 'Essential Shia jurisprudence covering daily life.', 'Wudu, Ghusl, Shia Namaz, Fasting, Khums, Halal & Haram diet.')" class="text-xs font-bold text-brand-800 hover:text-brand-950">View Details &rarr;</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Course 2: Salah & Dua -->
-        <div class="bg-white rounded-3xl overflow-hidden border border-stone-200 shadow-sm hover:shadow-xl transition flex flex-col justify-between">
-          <div class="h-48 overflow-hidden relative">
-            <img src="/images/salah_and_dua_1791362290307.jpg" 
-                 onerror="this.src='https://images.unsplash.com/photo-1564769625905-50e93615e769?w=600&auto=format&fit=crop&q=80'" 
-                 alt="Salah & Dua Praying" class="w-full h-full object-cover">
-            <span class="absolute top-3 right-3 bg-brand-900 text-gold-300 text-[10px] font-bold px-2.5 py-1 rounded-full">Namaz &amp; Duas</span>
-          </div>
-          <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
-            <div>
-              <h3 class="text-lg font-bold text-stone-900">Salah &amp; Duas (Shia Namaz &amp; Masnoon Ziyarat)</h3>
-              <p class="text-stone-600 text-xs mt-2 leading-relaxed">
-                Complete practical Shia Namaz with Turbah Karbala, Adhan, Iqamah, hands raised in Qunoot, Tashahhud, Dua-e-Faraj, Kumayl, and Ziyarat Ashura.
-              </p>
-            </div>
-            <div class="pt-4 border-t border-stone-100 flex items-center justify-between">
-              <span class="text-xs font-extrabold text-brand-800">$35 / month</span>
-              <button onclick="openCourseModal('Salah & Duas', 'Master Shia Namaz and supplications.', 'Turbah sajdah, Qunoot, Dua-e-Faraj, Dua Kumayl, Ziyarat Ashura.')" class="text-xs font-bold text-brand-800 hover:text-brand-950">View Details &rarr;</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Course 3: Basic Islamic Creed -->
-        <div class="bg-white rounded-3xl overflow-hidden border border-stone-200 shadow-sm hover:shadow-xl transition flex flex-col justify-between">
-          <div class="h-48 overflow-hidden relative">
-            <img src="/images/islamic_creed_1791362308705.jpg" 
-                 onerror="this.src='https://images.unsplash.com/photo-1590076215667-875d4ef2d7ee?w=600&auto=format&fit=crop&q=80'" 
-                 alt="Basic Islamic Creed" class="w-full h-full object-cover">
-            <span class="absolute top-3 right-3 bg-brand-900 text-gold-300 text-[10px] font-bold px-2.5 py-1 rounded-full">Usool-e-Deen</span>
-          </div>
-          <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
-            <div>
-              <h3 class="text-lg font-bold text-stone-900">Basic Islamic Creed &amp; Shia Aqaid</h3>
-              <p class="text-stone-600 text-xs mt-2 leading-relaxed">
-                The 5 Roots of Religion: Tawheed, Adl, Nabuwwat, Imamat (12 Divine Imams), Qiyamat, and the sacred Kalimat with Wilayat-e-Aliyyun Waliyyullah.
-              </p>
-            </div>
-            <div class="pt-4 border-t border-stone-100 flex items-center justify-between">
-              <span class="text-xs font-extrabold text-brand-800">$35 / month</span>
-              <button onclick="openCourseModal('Basic Islamic Creed & Shia Aqaid', 'Strong rational foundation in Islamic theology.', 'Tawheed, Adl, Nabuwwat, Imamat, Qiyamat, and Kalimat.')" class="text-xs font-bold text-brand-800 hover:text-brand-950">View Details &rarr;</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Course 4: Quran Translation & Tafseer -->
-        <div class="bg-white rounded-3xl overflow-hidden border border-stone-200 shadow-sm hover:shadow-xl transition flex flex-col justify-between">
-          <div class="h-48 overflow-hidden relative">
-            <img src="/images/quran_tafseer_mushaf_1791439477672.jpg" 
-                 onerror="this.src='https://images.unsplash.com/photo-1585036156171-384164a8c675?w=600&auto=format&fit=crop&q=80'" 
-                 alt="Quran Mushaf Tafseer" class="w-full h-full object-cover">
-            <span class="absolute top-3 right-3 bg-brand-900 text-gold-300 text-[10px] font-bold px-2.5 py-1 rounded-full">Tafseer</span>
-          </div>
-          <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
-            <div>
-              <h3 class="text-lg font-bold text-stone-900">Quran Translation &amp; Tafseer-e-Ahlulbayt</h3>
-              <p class="text-stone-600 text-xs mt-2 leading-relaxed">
-                Word-by-word Urdu and English translation with authentic commentary based on Tafseer Al-Mizan, Tafseer Nemoona, and Hadith-e-Thaqalayn traditions.
-              </p>
-            </div>
-            <div class="pt-4 border-t border-stone-100 flex items-center justify-between">
-              <span class="text-xs font-extrabold text-brand-800">$45 / month</span>
-              <button onclick="openCourseModal('Quran Translation & Tafseer', 'Understand the deep meanings of the Holy Quran.', 'Vocabulary, context of revelation, and Ahlulbayt (AS) commentary.')" class="text-xs font-bold text-brand-800 hover:text-brand-950">View Details &rarr;</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Course 5: Shia Islamic Studies for Kids -->
-        <div class="bg-white rounded-3xl overflow-hidden border border-stone-200 shadow-sm hover:shadow-xl transition flex flex-col justify-between">
-          <div class="h-48 overflow-hidden relative">
-            <img src="/images/kids_reading_islamic_book_1791439502608.jpg" 
-                 onerror="this.src='https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&auto=format&fit=crop&q=80'" 
-                 alt="Children reading Islamic book" class="w-full h-full object-cover">
-            <span class="absolute top-3 right-3 bg-brand-900 text-gold-300 text-[10px] font-bold px-2.5 py-1 rounded-full">For Children</span>
-          </div>
-          <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
-            <div>
-              <h3 class="text-lg font-bold text-stone-900">Shia Islamic Studies for Kids</h3>
-              <p class="text-stone-600 text-xs mt-2 leading-relaxed">
-                Interactive stories of Panjatan Pak (AS), Karbala heroes, Islamic moral character (Akhlaq), and daily manners tailored for young minds in western countries.
-              </p>
-            </div>
-            <div class="pt-4 border-t border-stone-100 flex items-center justify-between">
-              <span class="text-xs font-extrabold text-brand-800">$35 / month</span>
-              <button onclick="openCourseModal('Shia Islamic Studies for Kids', 'Fun, engaging curriculum for children.', 'Panjatan Pak stories, Karbala lessons, and Islamic manners.')" class="text-xs font-bold text-brand-800 hover:text-brand-950">View Details &rarr;</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Course 6: Quran Reading Nazra -->
-        <div class="bg-white rounded-3xl overflow-hidden border border-stone-200 shadow-sm hover:shadow-xl transition flex flex-col justify-between">
-          <div class="h-48 overflow-hidden relative">
-            <img src="/images/kid_quran_laptop_1791439523648.jpg" 
-                 onerror="this.src='https://images.unsplash.com/photo-1609599006353-e629aaabfeae?w=600&auto=format&fit=crop&q=80'" 
-                 alt="Kid reading Quran on laptop" class="w-full h-full object-cover">
-            <span class="absolute top-3 right-3 bg-brand-900 text-gold-300 text-[10px] font-bold px-2.5 py-1 rounded-full">Nazra Fluency</span>
-          </div>
-          <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
-            <div>
-              <h3 class="text-lg font-bold text-stone-900">Quran Reading with Fluency (Nazra)</h3>
-              <p class="text-stone-600 text-xs mt-2 leading-relaxed">
-                Progress from Noorani Qaida to fluent recitation of the Holy Quran with correct stops (Waqf) and confidence under patient 1-on-1 supervision.
-              </p>
-            </div>
-            <div class="pt-4 border-t border-stone-100 flex items-center justify-between">
-              <span class="text-xs font-extrabold text-brand-800">$40 / month</span>
-              <button onclick="openCourseModal('Quran Reading with Fluency (Nazra)', 'Fluent recitation from Noorani Qaida to complete Holy Quran.', 'Letter pronunciation, Waqf rules, continuous recitation.')" class="text-xs font-bold text-brand-800 hover:text-brand-950">View Details &rarr;</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Course 7: Quran Memorization / Hifz -->
-        <div class="bg-white rounded-3xl overflow-hidden border border-stone-200 shadow-sm hover:shadow-xl transition flex flex-col justify-between">
-          <div class="h-48 overflow-hidden relative">
-            <img src="/images/kid_memorizing_quran_1791439798645.jpg" 
-                 onerror="this.src='https://images.unsplash.com/photo-1542810634-71277d95dcbb?w=600&auto=format&fit=crop&q=80'" 
-                 alt="Kid memorizing Quran" class="w-full h-full object-cover">
-            <span class="absolute top-3 right-3 bg-brand-900 text-gold-300 text-[10px] font-bold px-2.5 py-1 rounded-full">Hifz Program</span>
-          </div>
-          <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
-            <div>
-              <h3 class="text-lg font-bold text-stone-900">Quran Memorization (Hifz Program)</h3>
-              <p class="text-stone-600 text-xs mt-2 leading-relaxed">
-                Structured Sabaq, Sabqi, and Manzil retention system for full Quran or selected Surahs (Juz Amma, Yaseen, Mulk, Rahman) with certified Huffaz.
-              </p>
-            </div>
-            <div class="pt-4 border-t border-stone-100 flex items-center justify-between">
-              <span class="text-xs font-extrabold text-brand-800">$65 / month</span>
-              <button onclick="openCourseModal('Quran Memorization (Hifz)', 'Complete or selected Surahs memorization track.', 'Daily Sabaq, Sabqi review, and Manzil retention.')" class="text-xs font-bold text-brand-800 hover:text-brand-950">View Details &rarr;</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Course 8: Nahjul Balagha -->
-        <div class="bg-white rounded-3xl overflow-hidden border border-stone-200 shadow-sm hover:shadow-xl transition flex flex-col justify-between">
-          <div class="h-48 overflow-hidden relative">
-            <img src="/images/nahjul_balagha_1791362362705.jpg" 
-                 onerror="this.src='https://images.unsplash.com/photo-1532012164546-f432f2e3ef17?w=600&auto=format&fit=crop&q=80'" 
-                 alt="Nahjul Balagha" class="w-full h-full object-cover">
-            <span class="absolute top-3 right-3 bg-brand-900 text-gold-300 text-[10px] font-bold px-2.5 py-1 rounded-full">Wisdom</span>
-          </div>
-          <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
-            <div>
-              <h3 class="text-lg font-bold text-stone-900">Nahjul Balagha for Youth &amp; Adults</h3>
-              <p class="text-stone-600 text-xs mt-2 leading-relaxed">
-                Peak of Eloquence: Timeless sermons on Tawheed, Letter 31 to Imam Hasan (AS) on character building, Letter 53 to Malik al-Ashtar, and daily aphorisms.
-              </p>
-            </div>
-            <div class="pt-4 border-t border-stone-100 flex items-center justify-between">
-              <span class="text-xs font-extrabold text-brand-800">$40 / month</span>
-              <button onclick="openCourseModal('Nahjul Balagha Studies', 'Wisdom of Amir al-Mu\'mineen Imam Ali (AS).', 'Sermons, moral letters, and governance guidelines.')" class="text-xs font-bold text-brand-800 hover:text-brand-950">View Details &rarr;</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Course 9: Noorani Qaida -->
-        <div class="bg-white rounded-3xl overflow-hidden border border-stone-200 shadow-sm hover:shadow-xl transition flex flex-col justify-between">
-          <div class="h-48 overflow-hidden relative">
-            <img src="/images/noorani_qaida_1791362344187.jpg" 
-                 onerror="this.src='https://images.unsplash.com/photo-1544717305-2782549b5136?w=600&auto=format&fit=crop&q=80'" 
-                 alt="Noorani & Shia Qaida" class="w-full h-full object-cover">
-            <span class="absolute top-3 right-3 bg-brand-900 text-gold-300 text-[10px] font-bold px-2.5 py-1 rounded-full">Beginners</span>
-          </div>
-          <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
-            <div>
-              <h3 class="text-lg font-bold text-stone-900">Noorani &amp; Shia Qaida for Beginners</h3>
-              <p class="text-stone-600 text-xs mt-2 leading-relaxed">
-                Accurate Arabic letter recognition, Makharij of Arabic letters, vowels, Sukoon, Tashdeed, and Quranic words with patient 1-on-1 guidance.
-              </p>
-            </div>
-            <div class="pt-4 border-t border-stone-100 flex items-center justify-between">
-              <span class="text-xs font-extrabold text-brand-800">$35 / month</span>
-              <button onclick="openCourseModal('Noorani & Shia Qaida', 'The essential starting block for every student.', 'Arabic alphabet, joint forms, vowels, and Sukoon.')" class="text-xs font-bold text-brand-800 hover:text-brand-950">View Details &rarr;</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- TEACHERS SECTION -->
-  <section id="teachers" class="py-16 sm:py-24 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-3xl mx-auto space-y-3 mb-14">
-        <span class="text-brand-800 text-xs font-bold uppercase tracking-widest bg-emerald-100 px-3 py-1 rounded-full">Qualified Faculty</span>
-        <h2 class="text-3xl sm:text-4xl font-extrabold text-stone-900">Learn from Certified Scholars &amp; Huffaz</h2>
-        <p class="text-stone-600 text-sm">Dedicated female educators for sisters and Hawza scholars for brothers and kids.</p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <!-- Teacher 1: Molana Imtiaz Ali -->
-        <div class="bg-stone-50 rounded-3xl p-6 border border-stone-200 text-center flex flex-col items-center space-y-4 shadow-sm hover:shadow-lg transition">
-          <div class="w-28 h-28 rounded-full overflow-hidden border-4 border-brand-800 shadow-md">
-            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&auto=format&fit=crop&q=80" 
-                 alt="Molana Imtiaz Ali" class="w-full h-full object-cover">
-          </div>
-          <div>
-            <h3 class="text-lg font-bold text-stone-900">Molana Imtiaz Ali</h3>
-            <p class="text-brand-800 text-xs font-bold uppercase tracking-wider mt-0.5">Senior Shia Scholar &bull; Hawza Najaf</p>
-          </div>
-          <p class="text-stone-600 text-xs leading-relaxed">
-            Director &amp; Senior Scholar. Over 16 years teaching Fiqh-e-Jafariya, Nahjul Balagha, and Quranic sciences to overseas momineen worldwide.
-          </p>
-          <div class="w-full pt-3 border-t border-stone-200 text-xs text-stone-500 flex justify-between">
-            <span>Specialty: <strong>Fiqh &amp; Tafseer</strong></span>
-            <span>Experience: <strong>16+ Years</strong></span>
-          </div>
-          <button onclick="openTrialModal('Molana Imtiaz Ali')" class="w-full py-2 bg-brand-800 hover:bg-brand-900 text-gold-300 font-bold text-xs rounded-xl transition">
-            Book Trial with Molana Imtiaz
-          </button>
-        </div>
-
-        <!-- Teacher 2: Hafiza Maryam Fatima (In Hijab) -->
-        <div class="bg-stone-50 rounded-3xl p-6 border-2 border-brand-800 text-center flex flex-col items-center space-y-4 shadow-md relative">
-          <span class="absolute -top-3 bg-gold-500 text-stone-950 text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider shadow">Female Tutor</span>
-          <div class="w-28 h-28 rounded-full overflow-hidden border-4 border-brand-800 shadow-md">
-            <img src="/images/hafiza_maryam_hijab_1791440408489.jpg" 
-                 onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&auto=format&fit=crop&q=80'" 
-                 alt="Hafiza Maryam Fatima wearing hijab" class="w-full h-full object-cover">
-          </div>
-          <div>
-            <h3 class="text-lg font-bold text-stone-900">Hafiza Maryam Fatima</h3>
-            <p class="text-brand-800 text-xs font-bold uppercase tracking-wider mt-0.5">Hafiza-e-Quran &bull; Hawza Qom</p>
-          </div>
-          <p class="text-stone-600 text-xs leading-relaxed">
-            Specialized instructor for adult sisters, girls, and young children. Expert in Tajweed rules, child psychology, and Women's Ahkam.
-          </p>
-          <div class="w-full pt-3 border-t border-stone-200 text-xs text-stone-500 flex justify-between">
-            <span>Specialty: <strong>Tajweed &amp; Ahkam</strong></span>
-            <span>Experience: <strong>10+ Years</strong></span>
-          </div>
-          <button onclick="openTrialModal('Hafiza Maryam Fatima (Female Tutor)')" class="w-full py-2 bg-brand-800 hover:bg-brand-900 text-gold-300 font-bold text-xs rounded-xl transition">
-            Book Trial for Sisters / Kids
-          </button>
-        </div>
-
-        <!-- Teacher 3: Qari Syed Muhammad Jawad -->
-        <div class="bg-stone-50 rounded-3xl p-6 border border-stone-200 text-center flex flex-col items-center space-y-4 shadow-sm hover:shadow-lg transition">
-          <div class="w-28 h-28 rounded-full overflow-hidden border-4 border-brand-800 shadow-md">
-            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&auto=format&fit=crop&q=80" 
-                 alt="Qari Jawad Rizvi" class="w-full h-full object-cover">
-          </div>
-          <div>
-            <h3 class="text-lg font-bold text-stone-900">Qari Syed Jawad Rizvi</h3>
-            <p class="text-brand-800 text-xs font-bold uppercase tracking-wider mt-0.5">Ijazah in Tajweed &bull; Hafiz-e-Quran</p>
-          </div>
-          <p class="text-stone-600 text-xs leading-relaxed">
-            Master of Tajweed rules and beautiful Arabic recitation. Specialist in teaching accurate throat/tongue Makharij and Shia supplications.
-          </p>
-          <div class="w-full pt-3 border-t border-stone-200 text-xs text-stone-500 flex justify-between">
-            <span>Specialty: <strong>Hifz &amp; Tajweed</strong></span>
-            <span>Experience: <strong>12+ Years</strong></span>
-          </div>
-          <button onclick="openTrialModal('Qari Syed Jawad Rizvi')" class="w-full py-2 bg-brand-800 hover:bg-brand-900 text-gold-300 font-bold text-xs rounded-xl transition">
-            Book Trial with Qari Jawad
-          </button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- AUDIO QURAN PLAYER -->
-  <section id="quran" class="py-16 bg-brand-950 text-white">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6">
-      <div class="text-center space-y-2 mb-8">
-        <span class="text-gold-400 text-xs font-bold uppercase tracking-widest">Interactive Quran Player</span>
-        <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Listen to Beautiful Quranic Recitation</h2>
-      </div>
-
-      <div class="bg-brand-900/90 rounded-3xl p-6 sm:p-8 border border-emerald-700/50 shadow-2xl space-y-6">
-        <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
-          <label for="surah-select" class="text-xs font-bold text-gold-300 uppercase">Select Surah:</label>
-          <select id="surah-select" onchange="changeSurah()" class="bg-brand-950 border border-emerald-600 text-white rounded-xl px-4 py-2 text-xs font-medium focus:outline-none w-full sm:w-64">
-            <option value="001">Surah Al-Fatiha (01)</option>
-            <option value="112">Surah Al-Ikhlas (112)</option>
-            <option value="113">Surah Al-Falaq (113)</option>
-            <option value="114">Surah An-Nas (114)</option>
-            <option value="108">Surah Al-Kawthar (108)</option>
-            <option value="097">Surah Al-Qadr (97)</option>
-          </select>
-        </div>
-
-        <div class="bg-brand-950/80 rounded-2xl p-6 border border-emerald-800/80 text-center space-y-3">
-          <div id="surah-arabic" class="font-arabic text-xl sm:text-2xl text-gold-300 leading-loose">
-            بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ • الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ • الرَّحْمَٰنِ الرَّحِيمِ • مَالِكِ يَوْمِ الدِّينِ
-          </div>
-          <div id="surah-english" class="text-xs text-stone-300 italic">
-            In the name of Allah, the Entirely Merciful, the Especially Merciful. [All] praise is [due] to Allah, Lord of the worlds.
-          </div>
-        </div>
-
-        <audio id="audio-element" src="https://server8.mp3quran.net/afs/001.mp3" preload="metadata"></audio>
-
-        <div class="space-y-2">
-          <input type="range" id="seek-bar" value="0" step="1" oninput="seekAudio()" class="w-full accent-amber-400 cursor-pointer">
-          <div class="flex justify-between text-[11px] text-emerald-300 font-mono">
-            <span id="current-time">0:00</span>
-            <span id="duration-time">0:00</span>
-          </div>
-        </div>
-
-        <div class="flex justify-center items-center gap-4">
-          <button onclick="togglePlayAudio()" class="w-14 h-14 rounded-full bg-gold-500 hover:bg-gold-400 text-stone-950 flex items-center justify-center shadow-lg transition active:scale-95">
-            <svg id="play-icon" class="w-6 h-6 ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-            <svg id="pause-icon" class="w-6 h-6 hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-          </button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PRICING SECTION -->
-  <section id="pricing" class="py-16 sm:py-24 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-3xl mx-auto space-y-3 mb-10">
-        <span class="text-brand-800 text-xs font-bold uppercase tracking-widest bg-emerald-100 px-3 py-1 rounded-full">Transparent Pricing</span>
-        <h2 class="text-3xl sm:text-4xl font-extrabold text-stone-900">Affordable Monthly Fee Packages</h2>
-        <p class="text-stone-600 text-sm">3-Day Free Trial included. Select your local currency below:</p>
-        <div class="pt-3 flex justify-center items-center gap-2">
-          <button onclick="setCurrency('USD')" id="btn-usd" class="px-3 py-1 text-xs font-bold rounded-lg bg-brand-800 text-white">USD ($)</button>
-          <button onclick="setCurrency('GBP')" id="btn-gbp" class="px-3 py-1 text-xs font-bold rounded-lg bg-stone-200 text-stone-700">GBP (£)</button>
-          <button onclick="setCurrency('CAD')" id="btn-cad" class="px-3 py-1 text-xs font-bold rounded-lg bg-stone-200 text-stone-700">CAD (C$)</button>
-          <button onclick="setCurrency('PKR')" id="btn-pkr" class="px-3 py-1 text-xs font-bold rounded-lg bg-stone-200 text-stone-700">PKR (Rs)</button>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <!-- 2 Days/Week -->
-        <div class="bg-stone-50 rounded-3xl p-8 border border-stone-200 flex flex-col justify-between space-y-6">
-          <div>
-            <span class="text-xs font-bold uppercase text-stone-500">Flexible Pace</span>
-            <h3 class="text-xl font-bold text-stone-900 mt-1">2 Days / Week</h3>
-            <div class="mt-4"><span id="price-plan-1" class="text-4xl font-extrabold text-brand-900">$35</span><span class="text-stone-500 text-xs ml-2">/ month</span></div>
-            <p class="text-stone-600 text-xs mt-2">8 Live 1-on-1 sessions per month (30 mins each)</p>
-            <ul class="space-y-2.5 text-xs text-stone-700 mt-6">
-              <li>&check; 1-on-1 live personalized class</li>
-              <li>&check; Noorani/Shia Qaida &amp; Nazra</li>
-              <li>&check; Shia Wudu &amp; Namaz practical</li>
-              <li>&check; Choice of Male or Female tutor</li>
-            </ul>
-          </div>
-          <button onclick="openTrialModal('2 Days/Week Package')" class="w-full py-3 bg-stone-800 hover:bg-stone-900 text-white font-bold text-xs rounded-xl transition">Book 3-Day Free Trial</button>
-        </div>
-
-        <!-- 3 Days/Week -->
-        <div class="bg-white rounded-3xl p-8 border-2 border-brand-800 shadow-xl relative flex flex-col justify-between space-y-6">
-          <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-gold-500 text-stone-950 text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider shadow">Most Popular</span>
-          <div>
-            <span class="text-xs font-bold uppercase text-brand-800">Steady Progress</span>
-            <h3 class="text-xl font-bold text-stone-900 mt-1">3 Days / Week</h3>
-            <div class="mt-4"><span id="price-plan-2" class="text-4xl font-extrabold text-brand-900">$45</span><span class="text-stone-500 text-xs ml-2">/ month</span></div>
-            <p class="text-stone-600 text-xs mt-2">12 Live 1-on-1 sessions per month (30 mins each)</p>
-            <ul class="space-y-2.5 text-xs text-stone-700 mt-6">
-              <li>&check; Everything in 2 Days Plan</li>
-              <li>&check; Detailed Tajweed &amp; Makharij</li>
-              <li>&check; Shia Islamic Studies for Kids</li>
-              <li>&check; Monthly progress report card</li>
-            </ul>
-          </div>
-          <button onclick="openTrialModal('3 Days/Week Package')" class="w-full py-3 bg-brand-800 hover:bg-brand-900 text-gold-300 font-bold text-xs rounded-xl shadow transition">Book 3-Day Free Trial</button>
-        </div>
-
-        <!-- 5 Days/Week -->
-        <div class="bg-stone-50 rounded-3xl p-8 border border-stone-200 flex flex-col justify-between space-y-6">
-          <div>
-            <span class="text-xs font-bold uppercase text-stone-500">Intensive Track</span>
-            <h3 class="text-xl font-bold text-stone-900 mt-1">5 Days / Week</h3>
-            <div class="mt-4"><span id="price-plan-3" class="text-4xl font-extrabold text-brand-900">$70</span><span class="text-stone-500 text-xs ml-2">/ month</span></div>
-            <p class="text-stone-600 text-xs mt-2">20 Live 1-on-1 sessions per month (30 mins each)</p>
-            <ul class="space-y-2.5 text-xs text-stone-700 mt-6">
-              <li>&check; Quran Hifz &amp; Fluency mastery</li>
-              <li>&check; Daily Sabaq, Sabqi, and Manzil</li>
-              <li>&check; Fiqh-e-Jafariya &amp; Nahjul Balagha</li>
-              <li>&check; Priority slot reservation</li>
-            </ul>
-          </div>
-          <button onclick="openTrialModal('5 Days/Week Intensive Package')" class="w-full py-3 bg-stone-800 hover:bg-stone-900 text-white font-bold text-xs rounded-xl transition">Book 3-Day Free Trial</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- TESTIMONIALS SECTION -->
-  <section id="testimonials" class="py-16 sm:py-24 bg-stone-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-3xl mx-auto space-y-3 mb-14">
-        <span class="text-brand-800 text-xs font-bold uppercase tracking-widest bg-emerald-100 px-3 py-1 rounded-full">Momineen Feedback</span>
-        <h2 class="text-3xl sm:text-4xl font-extrabold text-stone-900">What Our Parents &amp; Students Say</h2>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <!-- Review 1: Sister Narjis Rizvi (Hijab) -->
-        <div class="bg-white rounded-3xl p-6 border border-stone-200 shadow-sm space-y-4">
-          <div class="flex items-center gap-4">
-            <div class="w-14 h-14 rounded-full overflow-hidden border-2 border-brand-800 shrink-0">
-              <img src="/images/narjis_hijab_avatar_1791440138599.jpg" 
-                   onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&auto=format&fit=crop&q=80'" 
-                   alt="Sister Narjis Rizvi wearing hijab" class="w-full h-full object-cover">
-            </div>
-            <div>
-              <h4 class="font-bold text-stone-900 text-sm">Sister Narjis Rizvi</h4>
-              <p class="text-xs text-stone-500">Toronto, Canada &bull; Parent</p>
-              <div class="text-gold-500 text-xs">★★★★★</div>
-            </div>
-          </div>
-          <p class="text-stone-600 text-xs leading-relaxed italic">
-            &ldquo;As a mother living in Canada, finding a qualified Shia female teacher was our highest priority. Hafiza Maryam Fatima is remarkably patient with my daughter and explains Ahkam so clearly. Highly recommended to all Mominaat!&rdquo;
-          </p>
-        </div>
-
-        <!-- Review 2: Mirza Hasan Ali (T-Shirt) -->
-        <div class="bg-white rounded-3xl p-6 border border-stone-200 shadow-sm space-y-4">
-          <div class="flex items-center gap-4">
-            <div class="w-14 h-14 rounded-full overflow-hidden border-2 border-brand-800 shrink-0">
-              <img src="/images/mirza_hasan_tshirt_1791440154061.jpg" 
-                   onerror="this.src='https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&auto=format&fit=crop&q=80'" 
-                   alt="Mirza Hasan Ali wearing t-shirt" class="w-full h-full object-cover">
-            </div>
-            <div>
-              <h4 class="font-bold text-stone-900 text-sm">Mirza Hasan Ali</h4>
-              <p class="text-xs text-stone-500">London, United Kingdom &bull; Professional</p>
-              <div class="text-gold-500 text-xs">★★★★★</div>
-            </div>
-          </div>
-          <p class="text-stone-600 text-xs leading-relaxed italic">
-            &ldquo;As an adult working in tech, I needed flexible class hours to learn Nahjul Balagha and Quranic Arabic. The 1-on-1 classes fit right into my schedule after work, and the Hawza scholars are exceptionally knowledgeable.&rdquo;
-          </p>
-        </div>
-
-        <!-- Review 3: Dr. Syed Shabbir Hussain -->
-        <div class="bg-white rounded-3xl p-6 border border-stone-200 shadow-sm space-y-4">
-          <div class="flex items-center gap-4">
-            <div class="w-14 h-14 rounded-full overflow-hidden border-2 border-brand-800 shrink-0">
-              <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&auto=format&fit=crop&q=80" 
-                   alt="Dr. Syed Shabbir Hussain" class="w-full h-full object-cover">
-            </div>
-            <div>
-              <h4 class="font-bold text-stone-900 text-sm">Dr. Syed Shabbir Hussain</h4>
-              <p class="text-xs text-stone-500">Dallas, USA &bull; Father of 2</p>
-              <div class="text-gold-500 text-xs">★★★★★</div>
-            </div>
-          </div>
-          <p class="text-stone-600 text-xs leading-relaxed italic">
-            &ldquo;My sons completed their Noorani Qaida and are now reciting the Holy Quran with accurate Tajweed. The monthly progress updates and supportive environment make Sada-e-Najaf the best choice for overseas Shia families.&rdquo;
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ SECTION -->
-  <section id="faq" class="py-16 bg-white border-t border-stone-200">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6">
-      <div class="text-center space-y-2 mb-10">
-        <span class="text-brand-800 text-xs font-bold uppercase tracking-widest bg-emerald-100 px-3 py-1 rounded-full">Common Queries</span>
-        <h2 class="text-3xl font-extrabold text-stone-900">Frequently Asked Questions</h2>
-      </div>
-
-      <div class="space-y-3">
-        <div class="border border-stone-200 rounded-2xl overflow-hidden">
-          <button onclick="toggleFaq(1)" class="w-full px-6 py-4 text-left font-bold text-xs sm:text-sm text-stone-800 flex justify-between items-center bg-stone-50 hover:bg-stone-100 transition">
-            <span>How does the 3-Day Free Trial work?</span>
-            <span id="faq-icon-1" class="text-brand-800 font-bold text-lg">+</span>
-          </button>
-          <div id="faq-ans-1" class="hidden px-6 py-4 text-xs text-stone-600 leading-relaxed border-t border-stone-200">
-            You receive 3 full one-on-one live trial sessions completely free without entering any credit card details. You can evaluate the tutor, curriculum, and class timings before deciding to enroll.
-          </div>
-        </div>
-
-        <div class="border border-stone-200 rounded-2xl overflow-hidden">
-          <button onclick="toggleFaq(2)" class="w-full px-6 py-4 text-left font-bold text-xs sm:text-sm text-stone-800 flex justify-between items-center bg-stone-50 hover:bg-stone-100 transition">
-            <span>Are female tutors available for daughters and adult sisters?</span>
-            <span id="faq-icon-2" class="text-brand-800 font-bold text-lg">+</span>
-          </button>
-          <div id="faq-ans-2" class="hidden px-6 py-4 text-xs text-stone-600 leading-relaxed border-t border-stone-200">
-            Yes, absolutely. We have certified female Hawza scholars and Huffaz (such as Hafiza Maryam Fatima) who exclusively teach sisters and young kids in a safe, private 1-on-1 setting.
-          </div>
-        </div>
-
-        <div class="border border-stone-200 rounded-2xl overflow-hidden">
-          <button onclick="toggleFaq(3)" class="w-full px-6 py-4 text-left font-bold text-xs sm:text-sm text-stone-800 flex justify-between items-center bg-stone-50 hover:bg-stone-100 transition">
-            <span>What video platform is used for classes?</span>
-            <span id="faq-icon-3" class="text-brand-800 font-bold text-lg">+</span>
-          </button>
-          <div id="faq-ans-3" class="hidden px-6 py-4 text-xs text-stone-600 leading-relaxed border-t border-stone-200">
-            Classes take place via Google Meet or Zoom. Our interactive digital whiteboard allows students and teachers to highlight Quranic verses, Tashkeel, and Tajweed Makharij in real-time.
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="bg-brand-950 text-emerald-100 pt-14 pb-8 border-t border-brand-900">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-        <div class="space-y-3">
-          <div class="flex items-center gap-2">
-            <div class="w-9 h-9 rounded-lg bg-brand-900 border border-gold-500 flex items-center justify-center text-gold-400 font-arabic text-xl font-bold">ص</div>
-            <span class="font-extrabold text-base text-white">Sada-e-Najaf</span>
-          </div>
-          <p class="text-xs text-emerald-200/80 leading-relaxed">
-            Premier Shia Muslim online academy providing 1-on-1 classes in Quran, Tajweed, Fiqh-e-Jafariya, and Ahlulbayt (AS) studies for momineen worldwide.
-          </p>
-        </div>
-
-        <div>
-          <h4 class="font-bold text-xs uppercase tracking-wider text-gold-400 mb-3">Quick Links</h4>
-          <ul class="space-y-2 text-xs text-emerald-200/80">
-            <li><a href="#hero" class="hover:text-white transition">Home</a></li>
-            <li><a href="#courses" class="hover:text-white transition">Course Catalog</a></li>
-            <li><a href="#teachers" class="hover:text-white transition">Hawza Faculty</a></li>
-            <li><a href="#pricing" class="hover:text-white transition">Fee Packages</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <h4 class="font-bold text-xs uppercase tracking-wider text-gold-400 mb-3">Key Courses</h4>
-          <ul class="space-y-2 text-xs text-emerald-200/80">
-            <li>Fiqh-e-Jafariya &amp; Ahkam</li>
-            <li>Salah &amp; Shia Duas</li>
-            <li>Basic Islamic Creed (Aqaid)</li>
-            <li>Quran Reading (Nazra &amp; Tajweed)</li>
-          </ul>
-        </div>
-
-        <div>
-          <h4 class="font-bold text-xs uppercase tracking-wider text-gold-400 mb-3">Direct Contact</h4>
-          <p class="text-xs text-emerald-200/80 leading-relaxed">Director: Molana Imtiaz Ali</p>
-          <p class="text-xs text-emerald-200/80 mt-1">WhatsApp: +92 314 8681093</p>
-          <p class="text-xs text-emerald-200/80 mt-1">Email: molanaimtiazali@gmail.com</p>
-        </div>
-      </div>
-
-      <div class="pt-8 border-t border-brand-900 text-center text-xs text-emerald-300/60">
-        &copy; 2026 Sada-e-Najaf Islamic Online Institute. All Rights Reserved. Dedicated to Khidmat-e-Ahlulbayt (A.S.).
-      </div>
-    </div>
-  </footer>
-
-  <!-- TRIAL MODAL -->
-  <div id="trial-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs hidden flex items-center justify-center p-4">
-    <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 space-y-4 shadow-2xl relative">
-      <button onclick="closeTrialModal()" class="absolute top-4 right-4 text-stone-400 hover:text-stone-700 text-xl font-bold">&times;</button>
-      <div>
-        <span class="text-brand-800 text-xs font-bold uppercase tracking-wider">Free 3-Day Trial</span>
-        <h3 class="text-xl font-bold text-stone-900">Schedule Your 1-on-1 Class</h3>
-      </div>
-      <form onsubmit="submitTrialForm(event)" class="space-y-3 text-xs">
-        <div>
-          <label class="font-bold text-stone-700 block mb-1">Student Full Name</label>
-          <input type="text" id="trial-name" required placeholder="e.g. Ali Raza" class="w-full px-3 py-2 border border-stone-300 rounded-xl focus:outline-none focus:border-brand-800">
-        </div>
-        <div class="grid grid-cols-2 gap-3">
-          <div>
-            <label class="font-bold text-stone-700 block mb-1">Student Age</label>
-            <input type="number" id="trial-age" required placeholder="e.g. 10" class="w-full px-3 py-2 border border-stone-300 rounded-xl focus:outline-none focus:border-brand-800">
-          </div>
-          <div>
-            <label class="font-bold text-stone-700 block mb-1">Country / City</label>
-            <input type="text" id="trial-country" required placeholder="e.g. London, UK" class="w-full px-3 py-2 border border-stone-300 rounded-xl focus:outline-none focus:border-brand-800">
-          </div>
-        </div>
-        <div>
-          <label class="font-bold text-stone-700 block mb-1">WhatsApp Phone Number</label>
-          <input type="tel" id="trial-phone" required placeholder="e.g. +44 7700 900123" class="w-full px-3 py-2 border border-stone-300 rounded-xl focus:outline-none focus:border-brand-800">
-        </div>
-        <div>
-          <label class="font-bold text-stone-700 block mb-1">Select Course</label>
-          <select id="trial-course" class="w-full px-3 py-2 border border-stone-300 rounded-xl focus:outline-none focus:border-brand-800">
-            <option>Fiqh-e-Jafariya & Shia Ahkam</option>
-            <option>Salah & Duas (Shia Namaz & Ziyarat)</option>
-            <option>Basic Islamic Creed & Shia Aqaid</option>
-            <option>Quran Reading with Fluency (Nazra)</option>
-            <option>Quran Translation & Tafseer</option>
-            <option>Shia Islamic Studies for Kids</option>
-            <option>Quran Memorization (Hifz Program)</option>
-            <option>Nahjul Balagha Studies</option>
-            <option>Noorani & Shia Qaida for Beginners</option>
-          </select>
-        </div>
-        <div>
-          <label class="font-bold text-stone-700 block mb-1">Teacher Preference</label>
-          <select id="trial-tutor" class="w-full px-3 py-2 border border-stone-300 rounded-xl focus:outline-none focus:border-brand-800">
-            <option>Female Tutor (Hafiza Maryam Fatima)</option>
-            <option>Male Scholar (Molana Imtiaz Ali / Qari Jawad)</option>
-          </select>
-        </div>
-        <button type="submit" class="w-full py-3 bg-brand-800 hover:bg-brand-900 text-gold-300 font-bold text-xs rounded-xl shadow transition mt-2">
-          Confirm Free Trial via WhatsApp &rarr;
-        </button>
-      </form>
-    </div>
-  </div>
-
-  <!-- COURSE MODAL -->
-  <div id="course-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs hidden flex items-center justify-center p-4">
-    <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 space-y-4 shadow-2xl relative">
-      <button onclick="closeCourseModal()" class="absolute top-4 right-4 text-stone-400 hover:text-stone-700 text-xl font-bold">&times;</button>
-      <h3 id="modal-title" class="text-xl font-bold text-stone-900">Course Details</h3>
-      <p id="modal-overview" class="text-xs text-stone-600 leading-relaxed"></p>
-      <div class="p-3 bg-stone-50 rounded-xl border border-stone-200">
-        <span class="text-[11px] font-bold text-brand-800 uppercase block mb-1">Key Curriculum Topics:</span>
-        <p id="modal-topics" class="text-xs text-stone-700 leading-relaxed"></p>
-      </div>
-      <div class="flex gap-3 pt-2">
-        <button onclick="closeCourseModal(); openTrialModal();" class="flex-1 py-2.5 bg-brand-800 text-gold-300 font-bold text-xs rounded-xl transition">Book Free Trial</button>
-        <button onclick="closeCourseModal()" class="px-4 py-2.5 bg-stone-200 text-stone-800 font-bold text-xs rounded-xl transition">Close</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- FLOATING WHATSAPP BUTTON -->
-  <a href="https://wa.me/923148681093?text=Salam%20Molana%20Imtiaz%20Ali" target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 z-40 bg-green-600 hover:bg-green-500 text-white p-4 rounded-full shadow-2xl transition transform hover:scale-110 flex items-center justify-center" title="Chat on WhatsApp">
-    <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
-  </a>
-
-  <!-- JAVASCRIPT -->
-  <script>
-    function toggleMobileMenu() {
-      document.getElementById('mobile-menu').classList.toggle('hidden');
-    }
-
-    function toggleFaq(num) {
-      const ans = document.getElementById('faq-ans-' + num);
-      const icon = document.getElementById('faq-icon-' + num);
-      if (ans.classList.contains('hidden')) {
-        ans.classList.remove('hidden');
-        icon.textContent = '−';
-      } else {
-        ans.classList.add('hidden');
-        icon.textContent = '+';
-      }
-    }
-
-    function openTrialModal(tutor) {
-      document.getElementById('trial-modal').classList.remove('hidden');
-      if (tutor && tutor.includes('Female')) {
-        document.getElementById('trial-tutor').selectedIndex = 0;
-      }
-    }
-
-    function closeTrialModal() {
-      document.getElementById('trial-modal').classList.add('hidden');
-    }
-
-    function openCourseModal(title, overview, topics) {
-      document.getElementById('modal-title').textContent = title;
-      document.getElementById('modal-overview').textContent = overview;
-      document.getElementById('modal-topics').textContent = topics;
-      document.getElementById('course-modal').classList.remove('hidden');
-    }
-
-    function closeCourseModal() {
-      document.getElementById('course-modal').classList.add('hidden');
-    }
-
-    function submitTrialForm(e) {
-      e.preventDefault();
-      const name = document.getElementById('trial-name').value;
-      const age = document.getElementById('trial-age').value;
-      const country = document.getElementById('trial-country').value;
-      const phone = document.getElementById('trial-phone').value;
-      const course = document.getElementById('trial-course').value;
-      const tutor = document.getElementById('trial-tutor').value;
-      const msg = `*Salam Molana Imtiaz Ali (Sada-e-Najaf)*%0A%0A` +
-        `I would like to book a *3-Day Free Trial*:%0A` +
-        `• *Student:* ${encodeURIComponent(name)}%0A` +
-        `• *Age:* ${encodeURIComponent(age)} years%0A` +
-        `• *Location:* ${encodeURIComponent(country)}%0A` +
-        `• *WhatsApp:* ${encodeURIComponent(phone)}%0A` +
-        `• *Course:* ${encodeURIComponent(course)}%0A` +
-        `• *Tutor:* ${encodeURIComponent(tutor)}%0A%0A` +
-        `Please confirm our schedule. JazakAllah Khair!`;
-      closeTrialModal();
-      window.open(`https://wa.me/923148681093?text=${msg}`, '_blank');
-    }
-
-    const rates = {
-      USD: { sym: '$', p1: 35, p2: 45, p3: 70 },
-      GBP: { sym: '£', p1: 28, p2: 36, p3: 55 },
-      CAD: { sym: 'C$', p1: 48, p2: 60, p3: 95 },
-      PKR: { sym: 'Rs.', p1: 5000, p2: 6500, p3: 10000 }
+    const Icons = {
+      BookOpen: () => <svg className="w-5 h-5 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>,
+      Video: () => <svg className="w-5 h-5 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>,
+      Star: () => <svg className="w-4 h-4 text-amber-400 fill-amber-400 inline-block" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>,
+      Check: () => <svg className="w-4 h-4 text-emerald-400 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" /></svg>,
+      Play: () => <svg className="w-5 h-5 inline-block fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>,
+      Pause: () => <svg className="w-5 h-5 inline-block fill-current" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>,
+      Globe: () => <svg className="w-4 h-4 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" /></svg>,
+      ShieldCheck: () => <svg className="w-5 h-5 inline-block text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>,
+      WhatsApp: () => <svg className="w-5 h-5 fill-current inline-block" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.539 1.761.812 2.791.812 3.179 0 5.766-2.587 5.766-5.767.001-3.181-2.586-5.797-5.766-5.797zm8.387 5.766c.001 4.636-3.771 8.409-8.408 8.409-1.42 0-2.8-.358-4.025-1.037l-4.57 1.197 1.222-4.454c-.754-1.31-1.15-2.797-1.15-4.115 0-4.636 3.772-8.408 8.408-8.408 4.638 0 8.409 3.772 8.409 8.408z"/></svg>,
+      Close: () => <svg className="w-6 h-6 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
     };
 
-    function setCurrency(cur) {
-      ['usd', 'gbp', 'cad', 'pkr'].forEach(c => {
-        const btn = document.getElementById('btn-' + c);
-        if (btn) btn.className = c === cur.toLowerCase() 
-          ? 'px-3 py-1 text-xs font-bold rounded-lg bg-brand-800 text-white' 
-          : 'px-3 py-1 text-xs font-bold rounded-lg bg-stone-200 text-stone-700';
+    const COURSES_DATA = [
+      {
+        id: 'noorani-qaida',
+        title: 'Shia Noorani Qaida for Kids & Beginners',
+        arabicTitle: 'القاعدة النورانية الشيعية',
+        description: 'Foundational reading course with authentic Makharij, pronunciation, and early exposure to Ahlulbayt (a.s) names and Shia Duas.',
+        highlights: ['Arabic Alphabet & Correct Makharij', 'Short & Long Vowels (Harkat)', 'Noorani Rules with Interactive Digital Pointer', 'Basic Daily Shia Duas & Kalimas'],
+        badge: 'Most Popular for Kids',
+        price: '$45 / month'
+      },
+      {
+        id: 'tajweed-shia',
+        title: 'Shia Tajweed-ul-Quran & Tarteel',
+        arabicTitle: 'تجويد القرآن الكريم والترتيل',
+        description: 'Master the melodious recitation of the Holy Quran according to the authentic rules of Tajweed, Waqf, Ikhfa, and Idgham.',
+        highlights: ['Ghunnah, Qalqalah & Madd Rules', 'Waqf (Stopping) & Ibtida (Starting)', 'Surah recitation with Tarteel rhythm', 'Individual oral correction every class'],
+        badge: 'Essential',
+        price: '$50 / month'
+      },
+      {
+        id: 'shia-ahkam',
+        title: 'Fiqh Jafaria, Ahkam & Shia Aqaid',
+        arabicTitle: 'الفقه الجعفري والأحكام الشرعية',
+        description: 'Comprehensive study of Shia Islamic jurisprudence according to Grand Maraji (Ayatollah Sistani & Khamenei), Taharat, Salaat, and Sawm.',
+        highlights: ['Wudhu, Ghusl & Tayammum practical tests', 'Complete Salaat (Namaz) with Shia Dua-e-Qunoot', 'Fasting (Sawm) rules and rulings', 'Concepts of Wilayah, Imamat & Adl'],
+        badge: 'Faith Essentials',
+        price: '$55 / month'
+      },
+      {
+        id: 'nahjul-balagha',
+        title: 'Nahjul Balagha & Sahifa Sajjadiya Insights',
+        arabicTitle: 'نهج البلاغة والصحيفة السجادية',
+        description: 'Deep dive into the peak of eloquence of Ameer al-Momineen Imam Ali (a.s) and the spiritual supplications of Imam Zain-ul-Abideen (a.s).',
+        highlights: ['Selected Khutbat (Sermons) with translation', 'Wisdoms (Hikmah) for daily life ethics', 'Dua-e-Kumayl & Dua-e-Makarim-ul-Akhlaq', 'Historical context and lessons for youth'],
+        badge: 'Spiritual Uplift',
+        price: '$60 / month'
+      },
+      {
+        id: 'female-tutors',
+        title: 'Female Shia Tutor Quran Classes',
+        arabicTitle: 'معلمات شيعيات متخصصات للأخوات',
+        description: '100% private, comfortable one-on-one sessions taught exclusively by certified female Shia scholars and Hawza graduates.',
+        highlights: ['1-on-1 private video or audio lessons', 'Female Hawza graduates & Hafizat', 'Shia Ahkam for women (Fiqh of Taharat)', 'Flexible times for moms & busy sisters'],
+        badge: 'Strict Privacy',
+        price: '$50 / month'
+      },
+      {
+        id: 'quran-memorization',
+        title: 'Shia Hifz-ul-Quran (Full & Selected Surahs)',
+        arabicTitle: 'حفظ القرآن الكريم وتثبيته',
+        description: 'Structured memorization program focusing on Juz Amma, Surah Yaseen, Surah Al-Mulk, Surah Waqiah, or full 30 Juz memorization.',
+        highlights: ['Daily Sabaq, Sabqi, and Manzil system', 'Long-term retention memory techniques', 'Shia Tajweed verification', 'Official Ijazah certification on completion'],
+        badge: 'Prestigious',
+        price: '$75 / month'
+      }
+    ];
+
+    const SURAHS = [
+      { id: 1, name: 'Al-Fatiha', arabic: 'الفَاتِحَة', ayahs: 7, meaning: 'The Opening', audioUrl: 'https://server8.mp3quran.net/afs/001.mp3' },
+      { id: 112, name: 'Al-Ikhlas', arabic: 'الإِخْلَاص', ayahs: 4, meaning: 'The Sincerity', audioUrl: 'https://server8.mp3quran.net/afs/112.mp3' },
+      { id: 113, name: 'Al-Falaq', arabic: 'الفَلَق', ayahs: 5, meaning: 'The Daybreak', audioUrl: 'https://server8.mp3quran.net/afs/113.mp3' },
+      { id: 114, name: 'An-Nas', arabic: 'النَّاس', ayahs: 6, meaning: 'Mankind', audioUrl: 'https://server8.mp3quran.net/afs/114.mp3' },
+      { id: 108, name: 'Al-Kawthar', arabic: 'الكَوْثَر', ayahs: 3, meaning: 'Abundance', audioUrl: 'https://server8.mp3quran.net/afs/108.mp3' },
+      { id: 97, name: 'Al-Qadr', arabic: 'القَدْر', ayahs: 5, meaning: 'The Night of Decree', audioUrl: 'https://server8.mp3quran.net/afs/097.mp3' }
+    ];
+
+    function App() {
+      const [modalOpen, setModalOpen] = useState(false);
+      const [currentSurah, setCurrentSurah] = useState(SURAHS[0]);
+      const [isPlaying, setIsPlaying] = useState(false);
+      const audioRef = useRef(new Audio(SURAHS[0].audioUrl));
+
+      const [formData, setFormData] = useState({
+        studentName: '',
+        whatsapp: '',
+        preferredTeacher: 'Female Shia Tutor',
+        course: 'Shia Noorani Qaida for Kids & Beginners'
       });
-      const r = rates[cur];
-      document.getElementById('price-plan-1').textContent = r.sym + r.p1;
-      document.getElementById('price-plan-2').textContent = r.sym + r.p2;
-      document.getElementById('price-plan-3').textContent = r.sym + r.p3;
+      const [bookingSubmitted, setBookingSubmitted] = useState(false);
+
+      useEffect(() => {
+        const audio = audioRef.current;
+        const handleEnded = () => setIsPlaying(false);
+        audio.addEventListener('ended', handleEnded);
+        return () => {
+          audio.pause();
+          audio.removeEventListener('ended', handleEnded);
+        };
+      }, []);
+
+      const togglePlay = (surah) => {
+        if (currentSurah.id === surah.id) {
+          if (isPlaying) {
+            audioRef.current.pause();
+            setIsPlaying(false);
+          } else {
+            audioRef.current.play();
+            setIsPlaying(true);
+          }
+        } else {
+          audioRef.current.pause();
+          audioRef.current = new Audio(surah.audioUrl);
+          setCurrentSurah(surah);
+          audioRef.current.play();
+          setIsPlaying(true);
+        }
+      };
+
+      const handleOpenBooking = (courseName = 'Shia Noorani Qaida for Kids & Beginners') => {
+        setFormData(prev => ({ ...prev, course: courseName }));
+        setModalOpen(true);
+        setBookingSubmitted(false);
+      };
+
+      const handleFormSubmit = (e) => {
+        e.preventDefault();
+        setBookingSubmitted(true);
+      };
+
+      return (
+        <div className="min-h-screen flex flex-col bg-[#031610] text-slate-100">
+          
+          <div className="bg-gradient-to-r from-emerald-950 via-emerald-900 to-emerald-950 border-b border-emerald-800/40 text-xs py-2 px-4">
+            <div className="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                <span className="font-semibold text-emerald-300">Sada-e-Najaf Online Institute</span>
+              </div>
+              <div className="flex items-center gap-4 text-slate-300">
+                <a href="https://wa.me/923148681093" target="_blank" className="text-emerald-400 font-semibold flex items-center gap-1">
+                  <Icons.WhatsApp /> WhatsApp: +92 314 8681093
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <header className="sticky top-0 z-40 bg-[#041c14]/90 backdrop-blur-md border-b border-emerald-800/40">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+              <a href="#" className="flex items-center gap-3">
+                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-600 to-emerald-900 border border-amber-400/50 flex items-center justify-center shadow-lg">
+                  <span className="arabic-text text-2xl text-amber-300 font-bold">ص</span>
+                </div>
+                <div>
+                  <div className="font-serif text-xl sm:text-2xl font-bold tracking-tight text-white">
+                    Sada-e-Najaf
+                  </div>
+                  <p className="text-xs text-emerald-300/80">صداۓ نجف اسلامک آن لائن انسٹیٹیوٹ</p>
+                </div>
+              </a>
+
+              <button 
+                onClick={() => handleOpenBooking()}
+                className="px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 hover:from-amber-400 shadow-lg"
+              >
+                Book 3-Day Free Trial
+              </button>
+            </div>
+          </header>
+
+          <section className="relative overflow-hidden pt-12 pb-24 islamic-pattern border-b border-emerald-800/40">
+            <div className="relative max-w-7xl mx-auto px-4 text-center">
+              <span className="arabic-text text-3xl sm:text-5xl text-amber-300/90 drop-shadow-md">
+                بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+              </span>
+              <h1 className="font-serif text-3xl sm:text-5xl font-bold text-white max-w-4xl mx-auto mt-6 leading-tight">
+                Learn Holy Quran & Ahlulbayt (a.s) Teachings with Dedicated <span className="gold-gradient-text">1-on-1 Shia Scholars</span>
+              </h1>
+              <p className="mt-4 text-slate-300 max-w-2xl mx-auto">
+                Director: Molana Imtiaz Ali (Hawza Najaf al-Ashraf)
+              </p>
+              <div className="mt-8 flex justify-center gap-4">
+                <button onClick={() => handleOpenBooking()} className="px-8 py-4 rounded-xl font-bold bg-amber-500 text-slate-950 shadow-xl">
+                  Start Free Trial
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <section id="courses" className="py-20 bg-[#031610]">
+            <div className="max-w-7xl mx-auto px-4">
+              <div className="text-center max-w-3xl mx-auto mb-12">
+                <h2 className="font-serif text-3xl font-bold text-white">Our Courses</h2>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {COURSES_DATA.map((course) => (
+                  <div key={course.id} className="p-6 rounded-3xl bg-emerald-950/40 border border-emerald-800/50 flex flex-col justify-between">
+                    <div>
+                      <div className="flex justify-between items-start mb-4">
+                        <span className="px-3 py-1 rounded-full text-xs font-bold bg-amber-500/20 text-amber-300">{course.badge}</span>
+                        <span className="text-xs font-bold text-emerald-400 font-mono">{course.price}</span>
+                      </div>
+                      <h3 className="text-xl font-bold text-white mb-1">{course.title}</h3>
+                      <p className="arabic-text text-sm text-amber-300/80 mb-3">{course.arabicTitle}</p>
+                      <p className="text-slate-300 text-xs mb-4">{course.description}</p>
+                    </div>
+                    <button onClick={() => handleOpenBooking(course.title)} className="w-full py-3 rounded-xl bg-emerald-800 hover:bg-emerald-700 text-white font-bold text-xs">
+                      Enroll Free Trial
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <section className="py-16 bg-[#02130e]">
+            <div className="max-w-4xl mx-auto px-4 text-center">
+              <h2 className="font-serif text-2xl font-bold text-white mb-6">Listen Audio Quran</h2>
+              <div className="p-6 rounded-2xl bg-emerald-950/80 border border-emerald-800">
+                <div className="flex justify-between items-center mb-4">
+                  <span className="text-lg font-bold text-amber-300">{currentSurah.name} ({currentSurah.arabic})</span>
+                  <button onClick={() => togglePlay(currentSurah)} className="w-12 h-12 rounded-full bg-amber-500 text-slate-950 flex items-center justify-center">
+                    {isPlaying ? <Icons.Pause /> : <Icons.Play />}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <footer className="bg-[#020e0a] border-t border-emerald-900 py-8 text-center text-xs text-slate-400">
+            <p>Sada-e-Najaf Online Islamic Institute • Contact: +92 314 8681093</p>
+          </footer>
+
+          {modalOpen && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80">
+              <div className="relative w-full max-w-md p-6 rounded-3xl bg-[#041c14] border border-emerald-700 text-white">
+                <button onClick={() => setModalOpen(false)} className="absolute top-4 right-4 text-slate-400">
+                  <Icons.Close />
+                </button>
+                {!bookingSubmitted ? (
+                  <form onSubmit={handleFormSubmit} className="space-y-3 text-xs">
+                    <h3 className="text-xl font-bold mb-4">Book Free Trial</h3>
+                    <input type="text" required value={formData.studentName} onChange={e => setFormData({...formData, studentName: e.target.value})} placeholder="Student Name" className="w-full px-3 py-2 rounded-xl bg-emerald-950 border border-emerald-800 text-white" />
+                    <input type="tel" required value={formData.whatsapp} onChange={e => setFormData({...formData, whatsapp: e.target.value})} placeholder="WhatsApp Number" className="w-full px-3 py-2 rounded-xl bg-emerald-950 border border-emerald-800 text-white" />
+                    <button type="submit" className="w-full py-3 rounded-xl bg-amber-500 text-slate-950 font-bold text-sm">Submit</button>
+                  </form>
+                ) : (
+                  <div className="text-center py-6">
+                    <h3 className="text-lg font-bold text-white mb-2">Request Received!</h3>
+                    <p className="text-xs text-slate-300 mb-4">We will contact you via WhatsApp shortly.</p>
+                    <button onClick={() => setModalOpen(false)} className="px-6 py-2 rounded-xl bg-emerald-800 text-white text-xs font-bold">Close</button>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
+        </div>
+      );
     }
 
-    const surahs = {
-      '001': {
-        ar: 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ • الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ • الرَّحْمَٰنِ الرَّحِيمِ • مَالِكِ يَوْمِ الدِّينِ • إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ',
-        en: 'In the name of Allah, the Entirely Merciful, the Especially Merciful. [All] praise is [due] to Allah, Lord of the worlds.',
-        url: 'https://server8.mp3quran.net/afs/001.mp3'
-      },
-      '112': {
-        ar: 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ • قُلْ هُوَ اللَّهُ أَحَدٌ • اللَّهُ الصَّمَدُ • لَمْ يَلِدْ وَلَمْ يُولَدْ • وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ',
-        en: 'Say, He is Allah, [who is] One, Allah, the Eternal Refuge. He neither begets nor is born, Nor is there to Him any equivalent.',
-        url: 'https://server8.mp3quran.net/afs/112.mp3'
-      },
-      '113': {
-        ar: 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ • قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ • مِن شَرِّ مَا خَلَقَ • وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ',
-        en: 'Say, I seek refuge in the Lord of daybreak from the evil of that which He created...',
-        url: 'https://server8.mp3quran.net/afs/113.mp3'
-      },
-      '114': {
-        ar: 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ • قُلْ أَعُوذُ بِرَبِّ النَّاسِ • مَلِكِ النَّاسِ • إِلَٰهِ النَّاسِ • مِن شَرِّ الْوَسْوَاسِ الْخَنَّاسِ',
-        en: 'Say, I seek refuge in the Lord of mankind, The Sovereign of mankind, The God of mankind...',
-        url: 'https://server8.mp3quran.net/afs/114.mp3'
-      },
-      '108': {
-        ar: 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ • إِنَّا أَعْطَيْنَاكَ الْكَوْثَرَ • فَصَلِّ لِرَبِّكَ وَانْحَرْ • إِنَّ شَانِئَكَ هُوَ الْأَبْتَرُ',
-        en: 'Indeed, We have granted you, [O Muhammad], al-Kawthar. So pray to your Lord and sacrifice...',
-        url: 'https://server8.mp3quran.net/afs/108.mp3'
-      },
-      '097': {
-        ar: 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ • إِنَّا أَنزَلْنَاهُ فِي لَيْلَةِ الْقَدْرِ • وَمَا أَدْرَاكَ مَا لَيْلَةُ الْقَدْرِ • لَيْلَةُ الْقَدْرِ خَيْرٌ مِّنْ أَلْفِ شَهْرٍ',
-        en: 'Indeed, We sent the Quran down during the Night of Decree...',
-        url: 'https://server8.mp3quran.net/afs/097.mp3'
-      }
-    };
-
-    const audio = document.getElementById('audio-element');
-    const playIcon = document.getElementById('play-icon');
-    const pauseIcon = document.getElementById('pause-icon');
-    const seekBar = document.getElementById('seek-bar');
-    const curTime = document.getElementById('current-time');
-    const durTime = document.getElementById('duration-time');
-
-    function changeSurah() {
-      const code = document.getElementById('surah-select').value;
-      const data = surahs[code];
-      if (data) {
-        document.getElementById('surah-arabic').innerHTML = data.ar;
-        document.getElementById('surah-english').textContent = data.en;
-        audio.src = data.url;
-        audio.play().then(() => {
-          playIcon.classList.add('hidden');
-          pauseIcon.classList.remove('hidden');
-        }).catch(() => {});
-      }
-    }
-
-    function togglePlayAudio() {
-      if (audio.paused) {
-        audio.play();
-        playIcon.classList.add('hidden');
-        pauseIcon.classList.remove('hidden');
-      } else {
-        audio.pause();
-        playIcon.classList.remove('hidden');
-        pauseIcon.classList.add('hidden');
-      }
-    }
-
-    function seekAudio() {
-      audio.currentTime = seekBar.value;
-    }
-
-    function fmt(s) {
-      if (isNaN(s)) return '0:00';
-      const m = Math.floor(s / 60);
-      const sec = Math.floor(s % 60);
-      return `${m}:${sec < 10 ? '0' : ''}${sec}`;
-    }
-
-    audio.addEventListener('timeupdate', () => {
-      seekBar.value = Math.floor(audio.currentTime);
-      curTime.textContent = fmt(audio.currentTime);
-    });
-
-    audio.addEventListener('loadedmetadata', () => {
-      seekBar.max = Math.floor(audio.duration);
-      durTime.textContent = fmt(audio.duration);
-    });
-
-    audio.addEventListener('ended', () => {
-      playIcon.classList.remove('hidden');
-      pauseIcon.classList.add('hidden');
-    });
+    ReactDOM.render(<App />, document.getElementById('root'));
   </script>
 </body>
 </html>
