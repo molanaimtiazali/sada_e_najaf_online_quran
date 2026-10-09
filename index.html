@@ -1,1 +1,389 @@
 
+HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="google-site-verification" content="pxf7ftaEnA32uJnzT8Jrb5LjQPEF2YZSeQuCdkZPXMQ" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Noor-ul-Quran Online Shia Academy | Dedicated 1-on-1 Shia Quranic & Islamic Education</title>
+  <meta name="description" content="Premier Shia Online Quran Academy offering 1-on-1 personalized Quran, Tajweed, Ahkam, Nahjul Balagha, and Fiqh Jafaria classes worldwide." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Outfit', 'sans-serif'],
+            serif: ['Playfair Display', 'serif'],
+            arabic: ['Amiri', 'serif']
+          },
+          colors: {
+            emerald: {
+              850: '#064e3b',
+              900: '#064436',
+              950: '#022c22'
+            },
+            amber: {
+              450: '#f59e0b'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- React 18 & Babel -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #06241b; }
+    ::-webkit-scrollbar-thumb { background: #10b981; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #059669; }
+    .islamic-pattern {
+      background-color: #041c14;
+      background-image: radial-gradient(#10b981 0.75px, transparent 0.75px), radial-gradient(#059669 0.75px, #041c14 0.75px);
+      background-size: 30px 30px;
+      background-position: 0 0, 15px 15px;
+    }
+    .gold-gradient-text {
+      background: linear-gradient(135deg, #fef08a 0%, #f59e0b 50%, #d97706 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .arabic-text {
+      font-family: 'Amiri', serif;
+      direction: rtl;
+    }
+  </style>
+</head>
+<body class="bg-[#031610] text-slate-100 font-sans antialiased selection:bg-amber-500 selection:text-slate-950">
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect, useRef } = React;
+
+    const Icons = {
+      BookOpen: () => <svg className="w-5 h-5 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>,
+      Video: () => <svg className="w-5 h-5 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>,
+      Star: () => <svg className="w-4 h-4 text-amber-400 fill-amber-400 inline-block" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>,
+      Check: () => <svg className="w-4 h-4 text-emerald-400 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" /></svg>,
+      Play: () => <svg className="w-5 h-5 inline-block fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>,
+      Pause: () => <svg className="w-5 h-5 inline-block fill-current" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>,
+      Globe: () => <svg className="w-4 h-4 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" /></svg>,
+      ShieldCheck: () => <svg className="w-5 h-5 inline-block text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>,
+      WhatsApp: () => <svg className="w-5 h-5 fill-current inline-block" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.539 1.761.812 2.791.812 3.179 0 5.766-2.587 5.766-5.767.001-3.181-2.586-5.797-5.766-5.797zm8.387 5.766c.001 4.636-3.771 8.409-8.408 8.409-1.42 0-2.8-.358-4.025-1.037l-4.57 1.197 1.222-4.454c-.754-1.31-1.15-2.797-1.15-4.115 0-4.636 3.772-8.408 8.408-8.408 4.638 0 8.409 3.772 8.409 8.408z"/></svg>,
+      Close: () => <svg className="w-6 h-6 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
+    };
+
+    const COURSES_DATA = [
+      {
+        id: 'noorani-qaida',
+        title: 'Shia Noorani Qaida for Kids & Beginners',
+        arabicTitle: 'القاعدة النورانية الشيعية',
+        description: 'Foundational reading course with authentic Makharij, pronunciation, and early exposure to Ahlulbayt (a.s) names and Shia Duas.',
+        highlights: ['Arabic Alphabet & Correct Makharij', 'Short & Long Vowels (Harkat)', 'Noorani Rules with Interactive Pointer', 'Basic Daily Shia Duas & Kalimas'],
+        badge: 'Most Popular for Kids',
+        price: '$45 / month'
+      },
+      {
+        id: 'tajweed-shia',
+        title: 'Shia Tajweed-ul-Quran & Tarteel',
+        arabicTitle: 'تجويد القرآن الكريم والترتيل',
+        description: 'Master the melodious recitation of the Holy Quran according to the authentic rules of Tajweed, Waqf, Ikhfa, and Idgham.',
+        highlights: ['Ghunnah, Qalqalah & Madd Rules', 'Waqf (Stopping) & Ibtida (Starting)', 'Surah recitation with Tarteel rhythm', 'Individual oral correction every class'],
+        badge: 'Essential',
+        price: '$50 / month'
+      },
+      {
+        id: 'shia-ahkam',
+        title: 'Fiqh Jafaria, Ahkam & Shia Aqaid',
+        arabicTitle: 'الفقه الجعفري والأحكام الشرعية',
+        description: 'Comprehensive study of Shia Islamic jurisprudence according to Grand Maraji (Ayatollah Sistani & Khamenei), Taharat, Salaat, and Sawm.',
+        highlights: ['Wudhu, Ghusl & Tayammum practical tests', 'Complete Salaat (Namaz) with Shia Dua-e-Qunoot', 'Fasting (Sawm) rules and rulings', 'Concepts of Wilayah, Imamat & Adl'],
+        badge: 'Faith Essentials',
+        price: '$55 / month'
+      },
+      {
+        id: 'nahjul-balagha',
+        title: 'Nahjul Balagha & Sahifa Sajjadiya Insights',
+        arabicTitle: 'نهج البلاغة والصحيفة السجادية',
+        description: 'Deep dive into the peak of eloquence of Ameer al-Momineen Imam Ali (a.s) and the spiritual supplications of Imam Zain-ul-Abideen (a.s).',
+        highlights: ['Selected Khutbat (Sermons) with translation', 'Wisdoms (Hikmah) for daily life ethics', 'Dua-e-Kumayl & Dua-e-Makarim-ul-Akhlaq', 'Historical context and lessons for youth'],
+        badge: 'Spiritual Uplift',
+        price: '$60 / month'
+      },
+      {
+        id: 'female-tutors',
+        title: 'Female Shia Tutor Quran Classes',
+        arabicTitle: 'معلمات شيعيات متخصصات للأخوات',
+        description: '100% private, comfortable one-on-one sessions taught exclusively by certified female Shia scholars and Hawza graduates.',
+        highlights: ['1-on-1 private video or audio lessons', 'Female Hawza graduates & Hafizat', 'Shia Ahkam for women (Fiqh of Taharat)', 'Flexible times for moms & busy sisters'],
+        badge: 'Strict Privacy',
+        price: '$50 / month'
+      },
+      {
+        id: 'quran-memorization',
+        title: 'Shia Hifz-ul-Quran (Full & Selected Surahs)',
+        arabicTitle: 'حفظ القرآن الكريم وتثبيته',
+        description: 'Structured memorization program focusing on Juz Amma, Surah Yaseen, Surah Al-Mulk, Surah Waqiah, or full 30 Juz memorization.',
+        highlights: ['Daily Sabaq, Sabqi, and Manzil system', 'Long-term retention memory techniques', 'Shia Tajweed verification', 'Official Ijazah certification on completion'],
+        badge: 'Prestigious',
+        price: '$75 / month'
+      }
+    ];
+
+    const SURAHS = [
+      { id: 1, name: 'Al-Fatiha', arabic: 'الفَاتِحَة', ayahs: 7, meaning: 'The Opening', audioUrl: 'https://server8.mp3quran.net/afs/001.mp3' },
+      { id: 112, name: 'Al-Ikhlas', arabic: 'الإِخْلَاص', ayahs: 4, meaning: 'The Sincerity', audioUrl: 'https://server8.mp3quran.net/afs/112.mp3' },
+      { id: 113, name: 'Al-Falaq', arabic: 'الفَلَق', ayahs: 5, meaning: 'The Daybreak', audioUrl: 'https://server8.mp3quran.net/afs/113.mp3' },
+      { id: 114, name: 'An-Nas', arabic: 'النَّاس', ayahs: 6, meaning: 'Mankind', audioUrl: 'https://server8.mp3quran.net/afs/114.mp3' },
+      { id: 108, name: 'Al-Kawthar', arabic: 'الكَوْثَر', ayahs: 3, meaning: 'Abundance', audioUrl: 'https://server8.mp3quran.net/afs/108.mp3' },
+      { id: 97, name: 'Al-Qadr', arabic: 'القَدْر', ayahs: 5, meaning: 'The Night of Decree', audioUrl: 'https://server8.mp3quran.net/afs/097.mp3' }
+    ];
+
+    function App() {
+      const [modalOpen, setModalOpen] = useState(false);
+      const [currentSurah, setCurrentSurah] = useState(SURAHS[0]);
+      const [isPlaying, setIsPlaying] = useState(false);
+      const audioRef = useRef(new Audio(SURAHS[0].audioUrl));
+
+      const [formData, setFormData] = useState({
+        studentName: '',
+        whatsapp: '',
+        preferredTeacher: 'Female Shia Tutor',
+        course: 'Shia Noorani Qaida for Kids & Beginners'
+      });
+      const [bookingSubmitted, setBookingSubmitted] = useState(false);
+
+      useEffect(() => {
+        const audio = audioRef.current;
+        const handleEnded = () => setIsPlaying(false);
+        audio.addEventListener('ended', handleEnded);
+        return () => {
+          audio.pause();
+          audio.removeEventListener('ended', handleEnded);
+        };
+      }, []);
+
+      const togglePlay = (surah) => {
+        if (currentSurah.id === surah.id) {
+          if (isPlaying) {
+            audioRef.current.pause();
+            setIsPlaying(false);
+          } else {
+            audioRef.current.play();
+            setIsPlaying(true);
+          }
+        } else {
+          audioRef.current.pause();
+          audioRef.current = new Audio(surah.audioUrl);
+          setCurrentSurah(surah);
+          audioRef.current.play();
+          setIsPlaying(true);
+        }
+      };
+
+      const handleOpenBooking = (courseName = 'Shia Noorani Qaida for Kids & Beginners') => {
+        setFormData(prev => ({ ...prev, course: courseName }));
+        setModalOpen(true);
+        setBookingSubmitted(false);
+      };
+
+      const handleFormSubmit = (e) => {
+        e.preventDefault();
+        setBookingSubmitted(true);
+      };
+
+      return (
+        <div className="min-h-screen flex flex-col bg-[#031610] text-slate-100">
+          
+          {/* Top Announcement Bar */}
+          <div className="bg-gradient-to-r from-emerald-950 via-emerald-900 to-emerald-950 border-b border-emerald-800/40 text-xs py-2 px-4">
+            <div className="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                <span className="font-semibold text-emerald-300">Sada-e-Najaf Online Institute</span>
+              </div>
+              <div className="flex items-center gap-4 text-slate-300">
+                <a href="https://wa.me/923148681093" target="_blank" className="text-emerald-400 font-semibold flex items-center gap-1">
+                  <Icons.WhatsApp /> WhatsApp: +92 314 8681093
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Navigation Bar */}
+          <header className="sticky top-0 z-40 bg-[#041c14]/90 backdrop-blur-md border-b border-emerald-800/40">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+              <a href="#" className="flex items-center gap-3">
+                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-600 to-emerald-900 border border-amber-400/50 flex items-center justify-center shadow-lg">
+                  <span className="arabic-text text-2xl text-amber-300 font-bold">ص</span>
+                </div>
+                <div>
+                  <div className="font-serif text-xl sm:text-2xl font-bold tracking-tight text-white">
+                    Sada-e-Najaf
+                  </div>
+                  <p className="text-xs text-emerald-300/80">صداۓ نجف اسلامک آن لائن انسٹیٹیوٹ</p>
+                </div>
+              </a>
+
+              <button 
+                onClick={() => handleOpenBooking()}
+                className="px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 hover:from-amber-400 shadow-lg"
+              >
+                Book 3-Day Free Trial
+              </button>
+            </div>
+          </header>
+
+          {/* Hero Section */}
+          <section className="relative overflow-hidden pt-12 pb-24 islamic-pattern border-b border-emerald-800/40">
+            <div className="relative max-w-7xl mx-auto px-4 text-center">
+              <span className="arabic-text text-3xl sm:text-5xl text-amber-300/90 drop-shadow-md">
+                بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+              </span>
+              <h1 className="font-serif text-3xl sm:text-5xl font-bold text-white max-w-4xl mx-auto mt-6 leading-tight">
+                Learn Holy Quran & Ahlulbayt (a.s) Teachings with Dedicated <span className="gold-gradient-text">1-on-1 Shia Scholars</span>
+              </h1>
+              <p className="mt-4 text-slate-300 max-w-2xl mx-auto">
+                Director: Molana Imtiaz Ali (Hawza Najaf al-Ashraf)
+              </p>
+              <div className="mt-8 flex justify-center gap-4">
+                <button onClick={() => handleOpenBooking()} className="px-8 py-4 rounded-xl font-bold bg-amber-500 text-slate-950 shadow-xl">
+                  Start Free Trial
+                </button>
+              </div>
+            </div>
+          </section>
+
+          {/* About Features Section */}
+          <section id="about" className="py-16 bg-[#02130e] border-b border-emerald-800/40">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="text-center max-w-3xl mx-auto mb-12">
+                <span className="text-xs font-bold text-amber-400 uppercase tracking-widest">Why Choose Us</span>
+                <h2 className="font-serif text-3xl font-bold text-white mt-2">Authentic Shia Islamic Education Online</h2>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="p-8 rounded-3xl bg-emerald-950/60 border border-emerald-800/50">
+                  <div className="text-3xl mb-4">📖</div>
+                  <h3 className="text-xl font-bold text-white mb-2">Authentic Curriculum</h3>
+                  <p className="text-slate-300 text-xs leading-relaxed">Tajweed, Shia Fiqh, Wudhu, and Namaz rules according to Ayatollah Sistani & Khamenei rulings.</p>
+                </div>
+                <div className="p-8 rounded-3xl bg-emerald-950/60 border border-emerald-800/50">
+                  <div className="text-3xl mb-4">🧕</div>
+                  <h3 className="text-xl font-bold text-white mb-2">Female Shia Tutors</h3>
+                  <p className="text-slate-300 text-xs leading-relaxed">Dedicated female Hawza graduates for sisters and young girls in complete privacy.</p>
+                </div>
+                <div className="p-8 rounded-3xl bg-emerald-950/60 border border-emerald-800/50">
+                  <div className="text-3xl mb-4">💻</div>
+                  <h3 className="text-xl font-bold text-white mb-2">Interactive Classroom</h3>
+                  <p className="text-slate-300 text-xs leading-relaxed">Screen sharing, digital Tajweed pointers, and 1-on-1 individual student focus.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Courses Section */}
+          <section id="courses" className="py-20 bg-[#031610]">
+            <div className="max-w-7xl mx-auto px-4">
+              <div className="text-center max-w-3xl mx-auto mb-12">
+                <h2 className="font-serif text-3xl font-bold text-white">Our Courses</h2>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {COURSES_DATA.map((course) => (
+                  <div key={course.id} className="p-6 rounded-3xl bg-emerald-950/40 border border-emerald-800/50 flex flex-col justify-between">
+                    <div>
+                      <div className="flex justify-between items-start mb-4">
+                        <span className="px-3 py-1 rounded-full text-xs font-bold bg-amber-500/20 text-amber-300">{course.badge}</span>
+                        <span className="text-xs font-bold text-emerald-400 font-mono">{course.price}</span>
+                      </div>
+                      <h3 className="text-xl font-bold text-white mb-1">{course.title}</h3>
+                      <p className="arabic-text text-sm text-amber-300/80 mb-3">{course.arabicTitle}</p>
+                      <p className="text-slate-300 text-xs mb-4">{course.description}</p>
+                      <ul className="mt-2 space-y-1 text-xs text-emerald-300/80">
+                        {course.highlights.map((h, i) => (
+                          <li key={i} className="flex items-center gap-1.5"><Icons.Check /> {h}</li>
+                        ))}
+                      </ul>
+                    </div>
+                    <button onClick={() => handleOpenBooking(course.title)} className="w-full py-3 rounded-xl bg-emerald-800 hover:bg-emerald-700 text-white font-bold text-xs mt-6">
+                      Enroll Free Trial
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Audio Quran Section */}
+          <section className="py-16 bg-[#02130e]">
+            <div className="max-w-4xl mx-auto px-4 text-center">
+              <h2 className="font-serif text-2xl font-bold text-white mb-6">Listen Audio Quran</h2>
+              <div className="p-6 rounded-2xl bg-emerald-950/80 border border-emerald-800">
+                <div className="flex justify-between items-center mb-4">
+                  <span className="text-lg font-bold text-amber-300">{currentSurah.name} ({currentSurah.arabic})</span>
+                  <button onClick={() => togglePlay(currentSurah)} className="w-12 h-12 rounded-full bg-amber-500 text-slate-950 flex items-center justify-center font-bold">
+                    {isPlaying ? <Icons.Pause /> : <Icons.Play />}
+                  </button>
+                </div>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mt-4">
+                  {SURAHS.map((surah) => (
+                    <button key={surah.id} onClick={() => togglePlay(surah)} className={`p-2 rounded-lg text-xs font-bold border ${currentSurah.id === surah.id ? 'bg-amber-500 text-slate-950 border-amber-400' : 'bg-emerald-900/40 text-slate-300 border-emerald-800'}`}>
+                      {surah.name}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Footer */}
+          <footer className="bg-[#020e0a] border-t border-emerald-900 py-8 text-center text-xs text-slate-400">
+            <p>Sada-e-Najaf Online Islamic Institute • Director: Molana Imtiaz Ali • Contact: +92 314 8681093</p>
+          </footer>
+
+          {/* Booking Modal */}
+          {modalOpen && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80">
+              <div className="relative w-full max-w-md p-6 rounded-3xl bg-[#041c14] border border-emerald-700 text-white">
+                <button onClick={() => setModalOpen(false)} className="absolute top-4 right-4 text-slate-400">
+                  <Icons.Close />
+                </button>
+                {!bookingSubmitted ? (
+                  <form onSubmit={handleFormSubmit} className="space-y-3 text-xs">
+                    <h3 className="text-xl font-bold mb-4">Book Free Trial</h3>
+                    <input type="text" required value={formData.studentName} onChange={e => setFormData({...formData, studentName: e.target.value})} placeholder="Student Name" className="w-full px-3 py-2 rounded-xl bg-emerald-950 border border-emerald-800 text-white" />
+                    <input type="tel" required value={formData.whatsapp} onChange={e => setFormData({...formData, whatsapp: e.target.value})} placeholder="WhatsApp Number" className="w-full px-3 py-2 rounded-xl bg-emerald-950 border border-emerald-800 text-white" />
+                    <button type="submit" className="w-full py-3 rounded-xl bg-amber-500 text-slate-950 font-bold text-sm">Submit Request</button>
+                  </form>
+                ) : (
+                  <div className="text-center py-6">
+                    <h3 className="text-lg font-bold text-white mb-2">Request Received!</h3>
+                    <p className="text-xs text-slate-300 mb-4">We will contact you via WhatsApp shortly.</p>
+                    <button onClick={() => setModalOpen(false)} className="px-6 py-2 rounded-xl bg-emerald-800 text-white text-xs font-bold">Close</button>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
+        </div>
+      );
+    }
+
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
+</body>
+</html>
